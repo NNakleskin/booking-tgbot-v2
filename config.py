@@ -1,1 +1,1 @@
-botkey = ""
+botkey = "BOT_ID"
