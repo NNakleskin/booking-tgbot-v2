@@ -6,7 +6,7 @@ import gspread
 from aiogram import Bot, types
 from aiogram.utils import executor
 from aiogram.dispatcher import Dispatcher
-from aiogram.types import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup,\
+from aiogram.types import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, \
     InlineKeyboardButton
 import asyncio
 from aiogram.dispatcher import FSMContext
@@ -20,14 +20,12 @@ import config  # ИМПОРТИРУЕМ ДАННЫЕ ИЗ ФАЙЛОВ config.py
 import keyboard  # ИМПОРТИРУЕМ ДАННЫЕ ИЗ ФАЙЛОВ keyboard.py
 import gsheets
 
-
 storage = MemoryStorage()  # FOR FSM
 bot = Bot(token=config.botkey, parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot, storage=storage)
 logging.basicConfig(format=u'%(filename)s [LINE:%(lineno)d] #%(levelname)-8s [%(asctime)s]  %(message)s',
-                    level=logging.INFO,)
+                    level=logging.INFO, )
 q = Queue(connection=Redis())
-
 
 link = gsheets.link  # Задаем ссылку на Гугл таблици
 # Формируем данные для входа из нашего json файла
@@ -69,6 +67,18 @@ async def auth(message):
 async def start_menu(message):
     await bot.send_message(message.chat.id, f"Привет, *{message.from_user.first_name},* чем я могу вам помочь",
                            reply_markup=keyboard.menu, parse_mode='Markdown')
+
+
+@dp.callback_query_handler(text_contains='add')
+async def add(call: types.CallbackQuery):
+    await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Когда?",
+                                reply_markup=keyboard.date_add, parse_mode='Markdown')
+
+
+@dp.callback_query_handler(text_contains='del')
+async def delete(call: types.CallbackQuery):
+    await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Когда?",
+                                reply_markup=keyboard.date_del, parse_mode='Markdown')
 
 
 if __name__ == '__main__':
