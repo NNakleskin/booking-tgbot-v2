@@ -60,9 +60,15 @@ async def auth(message):
             joinedFile = open("user.txt", "a")
             joinedFile.write(str(message.chat.id) + '/' + str(message.text) + "\n")
         await bot.delete_message(message.chat.id, message.message_id)
+        await start_menu(message)
     else:  # Если не правильный просим еще раз
         await bot.delete_message(message.chat.id, message.message_id)
         await bot.send_message(message.from_user.id, 'Неправильно, попробуй еще раз!')
+
+
+async def start_menu(message):
+    await bot.send_message(message.chat.id, f"Привет, *{message.from_user.first_name},* чем я могу вам помочь",
+                           reply_markup=keyboard.menu, parse_mode='Markdown')
 
 
 if __name__ == '__main__':
