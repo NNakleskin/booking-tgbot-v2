@@ -40,6 +40,13 @@ with open('pins.txt', 'r') as f:  # Открываем файл с ПИН код
 user_data = {'477426832': '1111'}  # User list id:pin
 
 
+def coords(user):  # find a in in google sheet
+    for n in range(2, 39):
+        if sheet.cell(n, 5).value == str(user):
+            return n
+    return 2
+
+
 @dp.message_handler(Command("start"), state=None)
 async def start(message):
     await bot.send_message(message.chat.id, text="Введи PIN")
@@ -104,7 +111,7 @@ async def callback_worker(call: types.CallbackQuery):
         i = 1
         for x in range(9, 24, 2):
             i += 1
-            if sheet.cell(i, 3).value == str(user_data[call.message.chat.id]):
+            if sheet.cell(i, 2).value == str(user_data[call.message.chat.id]):
                 today_del.add(types.InlineKeyboardButton(text=str(x) + ":00", callback_data=str(x) + 'D'))
         today_del.add(types.InlineKeyboardButton(text='Меню', callback_data='menu'))
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
@@ -143,6 +150,338 @@ async def callback_worker(call: types.CallbackQuery):
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Ваши "
                                                                                                            "записи:",
                                     reply_markup=my_adds)
+    if call.data == "9A":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Секундочку...")
+        if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 6).value) < 1:
+            sheet.update_cell(2, 2, user_data[call.message.chat.id])
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Готово!")
+        else:
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Вы превысили лимит записей!")
+        time.sleep(5)
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Введи PIN")
+
+    if call.data == "11A":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Секундочку...")
+        if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 6).value) < 1:
+            sheet.update_cell(3, 2, user_data[call.message.chat.id])
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Готово!")
+        else:
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Вы превысили лимит записей!")
+        time.sleep(5)
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Введи PIN")
+
+    if call.data == "13A":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Секундочку...")
+        if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 6).value) < 1:
+            sheet.update_cell(4, 2, user_data[call.message.chat.id])
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Готово!")
+        else:
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Вы превысили лимит записей!")
+        time.sleep(5)
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Введи PIN")
+
+    if call.data == "15A":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 6).value) < 1:
+            sheet.update_cell(5, 2, user_data[call.message.chat.id])
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        else:
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Вы превысили лимит записей!")
+        time.sleep(5)
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Введи PIN")
+
+    if call.data == "17A":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 6).value) < 1:
+            sheet.update_cell(6, 2, user_data[call.message.chat.id])
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        else:
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Вы превысили лимит записей!")
+        time.sleep(5)
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Введи PIN")
+
+    if call.data == "19A":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 6).value) < 1:
+            sheet.update_cell(7, 2, user_data[call.message.chat.id])
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        else:
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Вы превысили лимит записей!")
+        time.sleep(5)
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Введи PIN")
+
+    if call.data == "21A":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 6).value) < 1:
+            sheet.update_cell(8, 2, user_data[call.message.chat.id])
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        else:
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Вы превысили лимит записей!")
+        time.sleep(5)
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Введи PIN")
+
+    if call.data == "23A":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 6).value) < 1:
+            sheet.update_cell(9, 2, user_data[call.message.chat.id])
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        else:
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Вы превысили лимит записей!")
+        time.sleep(5)
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Введи PIN")
+
+    if call.data == "9AT":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 7).value) < 1:
+            sheet.update_cell(2, 3, user_data[call.message.chat.id])
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        else:
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Вы превысили лимит записей!")
+        time.sleep(5)
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Введи PIN")
+
+    if call.data == "11AT":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 7).value) < 1:
+            sheet.update_cell(3, 3, user_data[call.message.chat.id])
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        else:
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Вы превысили лимит записей!")
+        time.sleep(5)
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Введи PIN")
+
+    if call.data == "13AT":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 7).value) < 1:
+            sheet.update_cell(4, 3, user_data[call.message.chat.id])
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        else:
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Вы превысили лимит записей!")
+        time.sleep(5)
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Введи PIN")
+
+    if call.data == "15AT":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 7).value) < 1:
+            sheet.update_cell(5, 3, user_data[call.message.chat.id])
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        else:
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Вы превысили лимит записей!")
+        time.sleep(5)
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Введи PIN")
+
+    if call.data == "17AT":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 7).value) < 1:
+            sheet.update_cell(6, 3, user_data[call.message.chat.id])
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        else:
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Вы превысили лимит записей!")
+        time.sleep(5)
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Введи PIN")
+
+    if call.data == "19AT":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 7).value) < 1:
+            sheet.update_cell(7, 3, user_data[call.message.chat.id])
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        else:
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Вы превысили лимит записей!")
+        time.sleep(5)
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Введи PIN")
+
+    if call.data == "21AT":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 7).value) < 1:
+            sheet.update_cell(8, 3, user_data[call.message.chat.id])
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        else:
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Вы превысили лимит записей!")
+        time.sleep(5)
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Введи PIN")
+
+    if call.data == "23AT":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 7).value) < 1:
+            sheet.update_cell(9, 3, user_data[call.message.chat.id])
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        else:
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Вы превысили лимит записей!")
+        time.sleep(5)
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Введи PIN")
+    if call.data == "9D":  # Delete the user at 9:00 today
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        sheet.update_cell(2, 2, '')
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        time.sleep(5)
+    if call.data == '11D':
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        sheet.update_cell(3, 2, '')
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        time.sleep(5)
+        
+    if call.data == "13D":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        sheet.update_cell(4, 2, '')
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        time.sleep(5)
+        
+    if call.data == '15D':
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        sheet.update_cell(5, 2, '')
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        time.sleep(5)
+        
+    if call.data == "17D":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        sheet.update_cell(6, 2, '')
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        time.sleep(5)
+        
+    if call.data == '19D':
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        sheet.update_cell(7, 2, '')
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        time.sleep(5)
+        
+    if call.data == "21D":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        sheet.update_cell(8, 2, '')
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        time.sleep(5)
+        
+    if call.data == '23D':
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        sheet.update_cell(9, 2, '')
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        time.sleep(5)
+        
+    if call.data == "9DT":  # Delete the user at 9:00 tomorrow
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        sheet.update_cell(2, 3, '')
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        time.sleep(5)
+        
+    if call.data == '11DT':
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        sheet.update_cell(3, 3, '')
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        time.sleep(5)
+        
+    if call.data == "13DT":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        sheet.update_cell(4, 3, '')
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        time.sleep(5)
+        
+    if call.data == '15DT':
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        sheet.update_cell(5, 3, '')
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        time.sleep(5)
+        
+    if call.data == "17DT":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        sheet.update_cell(6, 3, '')
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        time.sleep(5)
+        
+    if call.data == '19DT':
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        sheet.update_cell(7, 3, '')
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        time.sleep(5)
+        
+    if call.data == "21DT":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        sheet.update_cell(8, 3, '')
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        time.sleep(5)
+        
+    if call.data == '23DT':
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
+        sheet.update_cell(9, 3, '')
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text="Готово!")
+        time.sleep(5)
+        
+
+
+
+
 
 if __name__ == '__main__':
     print('Бот запущен!')
