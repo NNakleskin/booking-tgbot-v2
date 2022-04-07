@@ -85,7 +85,8 @@ async def callback_worker(call: types.CallbackQuery):
             if sheet.cell(i, 2).value not in users:
                 today_add.add(types.InlineKeyboardButton(text=str(x) + ":00", callback_data=str(x) + 'A'))
         today_add.add(types.InlineKeyboardButton(text='Меню', callback_data='menu'))
-        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Доступное время:",
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Доступное "
+                                                                                                           "время:",
                                     reply_markup=today_add, parse_mode='Markdown')
     if call.data == "tomorrow_add":
         tomorrow_add = InlineKeyboardMarkup()
@@ -93,9 +94,10 @@ async def callback_worker(call: types.CallbackQuery):
         for x in range(9, 24, 2):
             i += 1
             if sheet.cell(i, 3).value not in users:
-                tomorrow_add.add(types.InlineKeyboardButton(text=str(x) + ":00", callback_data=str(x) + 'A'))
+                tomorrow_add.add(types.InlineKeyboardButton(text=str(x) + ":00", callback_data=str(x) + 'AT'))
         tomorrow_add.add(types.InlineKeyboardButton(text='Меню', callback_data='menu'))
-        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Доступное время:",
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Доступное "
+                                                                                                           "время:",
                                     reply_markup=tomorrow_add, parse_mode='Markdown')
     if call.data == "today_del":
         today_del = InlineKeyboardMarkup()
@@ -103,7 +105,7 @@ async def callback_worker(call: types.CallbackQuery):
         for x in range(9, 24, 2):
             i += 1
             if sheet.cell(i, 3).value == str(user_data[call.message.chat.id]):
-                today_del.add(types.InlineKeyboardButton(text=str(x) + ":00", callback_data=str(x) + 'DT'))
+                today_del.add(types.InlineKeyboardButton(text=str(x) + ":00", callback_data=str(x) + 'D'))
         today_del.add(types.InlineKeyboardButton(text='Меню', callback_data='menu'))
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                     text="Какое время вы хотите удалить?",
@@ -123,7 +125,24 @@ async def callback_worker(call: types.CallbackQuery):
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                     text=f"Привет, *{call.from_user.first_name},* чем я могу вам помочь",
                                     reply_markup=keyboard.menu, parse_mode="Markdown")
-
+    if call.data == "myadds":
+        my_adds = InlineKeyboardMarkup()
+        my_adds.add(InlineKeyboardButton(text='Сегодня:', callback_data='N'))
+        i = 1
+        for x in range(9, 24, 2):
+            i += 1
+            if sheet.cell(i, 2).value == str(user_data[call.message.chat.id]):
+                my_adds.add(InlineKeyboardButton(text=str(x) + ':00', callback_data=str(x)))
+        my_adds.add(InlineKeyboardButton(text='Завтра:', callback_data='N'))
+        i = 1
+        for x in range(9, 24, 2):
+            i += 1
+            if sheet.cell(i, 3).value == str(user_data[call.message.chat.id]):
+                my_adds.add(InlineKeyboardButton(text=str(x) + ':00', callback_data=str(x)))
+        my_adds.add(types.InlineKeyboardButton(text='Меню', callback_data='menu'))
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Ваши "
+                                                                                                           "записи:",
+                                    reply_markup=my_adds)
 
 if __name__ == '__main__':
     print('Бот запущен!')
