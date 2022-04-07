@@ -78,13 +78,47 @@ async def callback_worker(call: types.CallbackQuery):
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Когда?",
                                     reply_markup=keyboard.date_del, parse_mode='Markdown')
     if call.data == "today_add":
-        await keyboard.update_today_add()
+        today_add = InlineKeyboardMarkup()
+        i = 1
+        for x in range(9, 24, 2):
+            i += 1
+            if sheet.cell(i, 2).value not in users:
+                today_add.add(types.InlineKeyboardButton(text=str(x) + ":00", callback_data=str(x) + 'A'))
+        today_add.add(types.InlineKeyboardButton(text='Меню', callback_data='menu'))
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Доступное время:",
-                                    reply_markup=keyboard.today_add, parse_mode='Markdown')
+                                    reply_markup=today_add, parse_mode='Markdown')
     if call.data == "tomorrow_add":
-        await keyboard.update_tomorrow_add()
+        tomorrow_add = InlineKeyboardMarkup()
+        i = 1
+        for x in range(9, 24, 2):
+            i += 1
+            if sheet.cell(i, 3).value not in users:
+                tomorrow_add.add(types.InlineKeyboardButton(text=str(x) + ":00", callback_data=str(x) + 'A'))
+        tomorrow_add.add(types.InlineKeyboardButton(text='Меню', callback_data='menu'))
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Доступное время:",
-                                    reply_markup=keyboard.tomorrow_add, parse_mode='Markdown')
+                                    reply_markup=tomorrow_add, parse_mode='Markdown')
+    if call.data == "today_del":
+        today_del = InlineKeyboardMarkup()
+        i = 1
+        for x in range(9, 24, 2):
+            i += 1
+            if sheet.cell(i, 3).value == str(user_data[call.message.chat.id]):
+                today_del.add(types.InlineKeyboardButton(text=str(x) + ":00", callback_data=str(x) + 'DT'))
+        today_del.add(types.InlineKeyboardButton(text='Меню', callback_data='menu'))
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Какое время вы хотите удалить?",
+                                    reply_markup=today_del, parse_mode='Markdown')
+    if call.data == "tomorrow_del":
+        tomorrow_del = InlineKeyboardMarkup()
+        i = 1
+        for x in range(9, 24, 2):
+            i += 1
+            if sheet.cell(i, 3).value == str(user_data[call.message.chat.id]):
+                tomorrow_del.add(types.InlineKeyboardButton(text=str(x) + ":00", callback_data=str(x) + 'DT'))
+        tomorrow_del.add(types.InlineKeyboardButton(text='Меню', callback_data='menu'))
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Какое время вы хотите удалить?",
+                                    reply_markup=tomorrow_del, parse_mode='Markdown')
     if call.data == "menu":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                     text=f"Привет, *{call.from_user.first_name},* чем я могу вам помочь",
