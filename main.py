@@ -81,6 +81,13 @@ async def delete(call: types.CallbackQuery):
                                 reply_markup=keyboard.date_del, parse_mode='Markdown')
 
 
+@dp.callback_query_handler(text_contains='menu')
+async def menu(call: types.CallbackQuery):
+    await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                text=f"Привет, *{call.from_user.first_name},* чем я могу вам помочь",
+                                reply_markup=keyboard.menu, parse_mode="Markdown")
+
+
 if __name__ == '__main__':
     print('Бот запущен!')
 executor.start_polling(dp)
