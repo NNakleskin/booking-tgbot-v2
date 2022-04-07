@@ -27,9 +27,24 @@ date_del.add(InlineKeyboardButton(text='Меню', callback_data='menu'))
 
 
 today_add = InlineKeyboardMarkup()
-i = 1
-for x in range(9, 24, 2):
-    i += 1
-    if sheet.cell(i, 2).value not in users:
-        today_add.add(types.InlineKeyboardButton(text=str(x) + ":00", callback_data=str(x) + 'A'))
-today_add.add(types.InlineKeyboardButton(text='Меню', callback_data='menu'))
+
+
+async def update_today_add():
+    i = 1
+    for x in range(9, 24, 2):
+        i += 1
+        if sheet.cell(i, 2).value not in users:
+            today_add.add(types.InlineKeyboardButton(text=str(x) + ":00", callback_data=str(x) + 'A'))
+    today_add.add(types.InlineKeyboardButton(text='Меню', callback_data='menu'))
+
+tomorrow_add = InlineKeyboardMarkup()
+
+
+async def update_tomorrow_add():
+    i = 1
+    for x in range(9, 24, 2):
+        i += 1
+        if sheet.cell(i, 3).value not in users:
+            tomorrow_add.add(types.InlineKeyboardButton(text=str(x) + ":00", callback_data=str(x) + 'A'))
+    tomorrow_add.add(types.InlineKeyboardButton(text='Меню', callback_data='menu'))
+

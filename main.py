@@ -69,29 +69,26 @@ async def start_menu(message):
                            reply_markup=keyboard.menu, parse_mode='Markdown')
 
 
-@dp.callback_query_handler(text_contains='add')
-async def add(call: types.CallbackQuery):
-    await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Когда?",
-                                reply_markup=keyboard.date_add, parse_mode='Markdown')
-
-
-@dp.callback_query_handler(text_contains='del')
-async def delete(call: types.CallbackQuery):
-    await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Когда?",
-                                reply_markup=keyboard.date_del, parse_mode='Markdown')
-
-
-@dp.callback_query_handler(text_contains='menu')
-async def menu(call: types.CallbackQuery):
-    await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                text=f"Привет, *{call.from_user.first_name},* чем я могу вам помочь",
-                                reply_markup=keyboard.menu, parse_mode="Markdown")
-
-
-@dp.callback_query_handler(text_contains='today_add')
-async def today_add(call: types.CallbackQuery):
-    await bot.send_message(call.message.chat.id, "Time",
-                           reply_markup=keyboard.today_add, parse_mode='Markdown')
+@dp.callback_query_handler()
+async def callback_worker(call: types.CallbackQuery):
+    if call.data == "add":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Когда?",
+                                    reply_markup=keyboard.date_add, parse_mode='Markdown')
+    if call.data == "del":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Когда?",
+                                    reply_markup=keyboard.date_del, parse_mode='Markdown')
+    if call.data == "today_add":
+        await keyboard.update_today_add()
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Доступное время:",
+                                    reply_markup=keyboard.today_add, parse_mode='Markdown')
+    if call.data == "tomorrow_add":
+        await keyboard.update_tomorrow_add()
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Доступное время:",
+                                    reply_markup=keyboard.tomorrow_add, parse_mode='Markdown')
+    if call.data == "menu":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text=f"Привет, *{call.from_user.first_name},* чем я могу вам помочь",
+                                    reply_markup=keyboard.menu, parse_mode="Markdown")
 
 
 if __name__ == '__main__':
