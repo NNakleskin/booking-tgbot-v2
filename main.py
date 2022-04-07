@@ -88,6 +88,12 @@ async def menu(call: types.CallbackQuery):
                                 reply_markup=keyboard.menu, parse_mode="Markdown")
 
 
+@dp.callback_query_handler(text_contains='today_add')
+async def today_add(call: types.CallbackQuery):
+    await bot.send_message(call.message.chat.id, "Time",
+                           reply_markup=keyboard.today_add, parse_mode='Markdown')
+
+
 if __name__ == '__main__':
     print('Бот запущен!')
 executor.start_polling(dp)
