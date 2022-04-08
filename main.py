@@ -1,7 +1,7 @@
+# -*- coding: utf8 -*-
 import logging
 import time
 import pprint  # импортируем pprint
-# -*- coding: utf8 -*-
 from aiogram import Bot, types
 from aiogram.utils import executor
 from aiogram.dispatcher import Dispatcher
@@ -10,8 +10,8 @@ from aiogram.dispatcher.filters import Command
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from redis import Redis
 from rq import Queue
-import config  # ИМПОРТИРУЕМ ДАННЫЕ ИЗ ФАЙЛОВ config.py
-import keyboard  # ИМПОРТИРУЕМ ДАННЫЕ ИЗ ФАЙЛОВ keyboard.py
+import config
+import keyboard
 import gsheets
 
 storage = MemoryStorage()  # FOR FSM
@@ -34,7 +34,7 @@ with open('pins.txt', 'r') as f:  # Открываем файл с ПИН код
 user_data = {}  # User list id:pin
 
 
-def coords(user):  # find a in in google sheet
+def coords(user):  # Поиск пользователя в таблице
     for n in range(2, 39):
         if sheet.cell(n, 5).value == str(user):
             return n
@@ -54,7 +54,7 @@ async def print_pin(message):
 @dp.message_handler(content_types=["text"])
 async def auth(message):
     if message.text in users:  # Если ПИН правильный, то переходим к кнопкам
-        if message.chat.id not in user_data:  # Checking a list
+        if message.chat.id not in user_data:
             user_data[message.chat.id] = message.text
             joinedFile = open("user.txt", "a")
             joinedFile.write(str(message.chat.id) + '/' + str(message.text) + "\n")
