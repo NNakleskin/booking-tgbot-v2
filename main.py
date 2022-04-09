@@ -79,6 +79,8 @@ async def callback_worker(call: types.CallbackQuery):
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Когда?",
                                     reply_markup=keyboard.date_del, parse_mode='Markdown')
     if call.data == "today_add":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
         today_add = InlineKeyboardMarkup()
         i = 1
         for x in range(9, 24, 2):
@@ -90,6 +92,8 @@ async def callback_worker(call: types.CallbackQuery):
                                                                                                            "время:",
                                     reply_markup=today_add, parse_mode='Markdown')
     if call.data == "tomorrow_add":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
         tomorrow_add = InlineKeyboardMarkup()
         i = 1
         for x in range(9, 24, 2):
@@ -101,6 +105,8 @@ async def callback_worker(call: types.CallbackQuery):
                                                                                                            "время:",
                                     reply_markup=tomorrow_add, parse_mode='Markdown')
     if call.data == "today_del":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
         today_del = InlineKeyboardMarkup()
         i = 1
         for x in range(9, 24, 2):
@@ -112,6 +118,8 @@ async def callback_worker(call: types.CallbackQuery):
                                     text="Какое время вы хотите удалить?",
                                     reply_markup=today_del, parse_mode='Markdown')
     if call.data == "tomorrow_del":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
         tomorrow_del = InlineKeyboardMarkup()
         i = 1
         for x in range(9, 24, 2):
@@ -127,6 +135,8 @@ async def callback_worker(call: types.CallbackQuery):
                                     text=f"Привет, *{call.from_user.first_name},* чем я могу вам помочь",
                                     reply_markup=keyboard.menu, parse_mode="Markdown")
     if call.data == "myadds":
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                    text="Секундочку...")
         my_adds = InlineKeyboardMarkup()
         my_adds.add(InlineKeyboardButton(text='Сегодня:', callback_data='N'))
         i = 1
