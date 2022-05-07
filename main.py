@@ -48,7 +48,7 @@ async def start(message):
 
 @dp.message_handler(Command("help"), state=None)
 async def print_pin(message):
-    help_text = "/start - перезапуск бота\nВ случае возникновения неполадок пишите @TennisSupport"
+    help_text = "/start - перезапуск бота\n\nВ случае возникновения неполадок пишите @TennisSupport"
     await bot.send_message(message.chat.id, text=help_text)
 
 
@@ -67,7 +67,7 @@ async def auth(message):
 
 
 async def start_menu(message):
-    await bot.send_message(message.chat.id, f"Привет, *{message.from_user.first_name},* чем я могу вам помочь\nВ случае возникновения неполадок пишите @TennisSupport",
+    await bot.send_message(message.chat.id, f"Привет, *{message.from_user.first_name},* чем я могу вам помочь\n\nВ случае возникновения неполадок пишите @TennisSupport",
                            reply_markup=keyboard.menu, parse_mode='Markdown')
 
 
@@ -81,7 +81,7 @@ async def callback_worker(call: types.CallbackQuery):
                                     reply_markup=keyboard.date_del, parse_mode='Markdown')
     if call.data == "today_add":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         today_add = InlineKeyboardMarkup()
         i = 1
         for x in range(9, 24, 2):
@@ -94,7 +94,7 @@ async def callback_worker(call: types.CallbackQuery):
                                     reply_markup=today_add, parse_mode='Markdown')
     if call.data == "tomorrow_add":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         tomorrow_add = InlineKeyboardMarkup()
         i = 1
         for x in range(9, 24, 2):
@@ -107,7 +107,7 @@ async def callback_worker(call: types.CallbackQuery):
                                     reply_markup=tomorrow_add, parse_mode='Markdown')
     if call.data == "today_del":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         today_del = InlineKeyboardMarkup()
         i = 1
         for x in range(9, 24, 2):
@@ -120,7 +120,7 @@ async def callback_worker(call: types.CallbackQuery):
                                     reply_markup=today_del, parse_mode='Markdown')
     if call.data == "tomorrow_del":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         tomorrow_del = InlineKeyboardMarkup()
         i = 1
         for x in range(9, 24, 2):
@@ -137,7 +137,7 @@ async def callback_worker(call: types.CallbackQuery):
                                     reply_markup=keyboard.menu, parse_mode="Markdown")
     if call.data == "myadds":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         my_adds = InlineKeyboardMarkup()
         my_adds.add(InlineKeyboardButton(text='Сегодня:', callback_data='N'))
         i = 1
@@ -157,7 +157,7 @@ async def callback_worker(call: types.CallbackQuery):
                                     reply_markup=my_adds)
     if call.data == "9A":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 6).value) < 1:
             sheet.update_cell(2, 2, user_data[call.message.chat.id])
             await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
@@ -170,7 +170,7 @@ async def callback_worker(call: types.CallbackQuery):
 
     if call.data == "11A":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 6).value) < 1:
             sheet.update_cell(3, 2, user_data[call.message.chat.id])
             await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
@@ -183,7 +183,7 @@ async def callback_worker(call: types.CallbackQuery):
 
     if call.data == "13A":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 6).value) < 1:
             sheet.update_cell(4, 2, user_data[call.message.chat.id])
             await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
@@ -196,7 +196,7 @@ async def callback_worker(call: types.CallbackQuery):
 
     if call.data == "15A":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 6).value) < 1:
             sheet.update_cell(5, 2, user_data[call.message.chat.id])
             await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
@@ -209,7 +209,7 @@ async def callback_worker(call: types.CallbackQuery):
 
     if call.data == "17A":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 6).value) < 1:
             sheet.update_cell(6, 2, user_data[call.message.chat.id])
             await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
@@ -222,7 +222,7 @@ async def callback_worker(call: types.CallbackQuery):
 
     if call.data == "19A":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 6).value) < 1:
             sheet.update_cell(7, 2, user_data[call.message.chat.id])
             await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
@@ -235,7 +235,7 @@ async def callback_worker(call: types.CallbackQuery):
 
     if call.data == "21A":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 6).value) < 1:
             sheet.update_cell(8, 2, user_data[call.message.chat.id])
             await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
@@ -248,7 +248,7 @@ async def callback_worker(call: types.CallbackQuery):
 
     if call.data == "23A":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 6).value) < 1:
             sheet.update_cell(9, 2, user_data[call.message.chat.id])
             await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
@@ -261,7 +261,7 @@ async def callback_worker(call: types.CallbackQuery):
 
     if call.data == "9AT":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 7).value) < 1:
             sheet.update_cell(2, 3, user_data[call.message.chat.id])
             await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
@@ -274,7 +274,7 @@ async def callback_worker(call: types.CallbackQuery):
 
     if call.data == "11AT":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 7).value) < 1:
             sheet.update_cell(3, 3, user_data[call.message.chat.id])
             await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
@@ -287,7 +287,7 @@ async def callback_worker(call: types.CallbackQuery):
 
     if call.data == "13AT":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 7).value) < 1:
             sheet.update_cell(4, 3, user_data[call.message.chat.id])
             await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
@@ -300,7 +300,7 @@ async def callback_worker(call: types.CallbackQuery):
 
     if call.data == "15AT":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 7).value) < 1:
             sheet.update_cell(5, 3, user_data[call.message.chat.id])
             await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
@@ -313,7 +313,7 @@ async def callback_worker(call: types.CallbackQuery):
 
     if call.data == "17AT":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 7).value) < 1:
             sheet.update_cell(6, 3, user_data[call.message.chat.id])
             await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
@@ -326,7 +326,7 @@ async def callback_worker(call: types.CallbackQuery):
 
     if call.data == "19AT":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 7).value) < 1:
             sheet.update_cell(7, 3, user_data[call.message.chat.id])
             await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
@@ -339,7 +339,7 @@ async def callback_worker(call: types.CallbackQuery):
 
     if call.data == "21AT":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 7).value) < 1:
             sheet.update_cell(8, 3, user_data[call.message.chat.id])
             await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
@@ -352,7 +352,7 @@ async def callback_worker(call: types.CallbackQuery):
 
     if call.data == "23AT":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         if int(sheet.cell(coords(str(user_data[call.message.chat.id])), 7).value) < 1:
             sheet.update_cell(9, 3, user_data[call.message.chat.id])
             await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
@@ -364,14 +364,14 @@ async def callback_worker(call: types.CallbackQuery):
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Введи PIN")
     if call.data == "9D":  # Delete the user at 9:00 today
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         sheet.update_cell(2, 2, '')
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                     text="Готово!")
         time.sleep(5)
     if call.data == '11D':
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         sheet.update_cell(3, 2, '')
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                     text="Готово!")
@@ -379,7 +379,7 @@ async def callback_worker(call: types.CallbackQuery):
         
     if call.data == "13D":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         sheet.update_cell(4, 2, '')
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                     text="Готово!")
@@ -387,7 +387,7 @@ async def callback_worker(call: types.CallbackQuery):
         
     if call.data == '15D':
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         sheet.update_cell(5, 2, '')
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                     text="Готово!")
@@ -395,7 +395,7 @@ async def callback_worker(call: types.CallbackQuery):
         
     if call.data == "17D":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         sheet.update_cell(6, 2, '')
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                     text="Готово!")
@@ -403,7 +403,7 @@ async def callback_worker(call: types.CallbackQuery):
         
     if call.data == '19D':
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         sheet.update_cell(7, 2, '')
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                     text="Готово!")
@@ -411,7 +411,7 @@ async def callback_worker(call: types.CallbackQuery):
         
     if call.data == "21D":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         sheet.update_cell(8, 2, '')
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                     text="Готово!")
@@ -419,7 +419,7 @@ async def callback_worker(call: types.CallbackQuery):
         
     if call.data == '23D':
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         sheet.update_cell(9, 2, '')
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                     text="Готово!")
@@ -427,7 +427,7 @@ async def callback_worker(call: types.CallbackQuery):
         
     if call.data == "9DT":  # Delete the user at 9:00 tomorrow
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         sheet.update_cell(2, 3, '')
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                     text="Готово!")
@@ -435,7 +435,7 @@ async def callback_worker(call: types.CallbackQuery):
         
     if call.data == '11DT':
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         sheet.update_cell(3, 3, '')
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                     text="Готово!")
@@ -443,7 +443,7 @@ async def callback_worker(call: types.CallbackQuery):
         
     if call.data == "13DT":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         sheet.update_cell(4, 3, '')
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                     text="Готово!")
@@ -451,7 +451,7 @@ async def callback_worker(call: types.CallbackQuery):
         
     if call.data == '15DT':
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         sheet.update_cell(5, 3, '')
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                     text="Готово!")
@@ -459,7 +459,7 @@ async def callback_worker(call: types.CallbackQuery):
         
     if call.data == "17DT":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         sheet.update_cell(6, 3, '')
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                     text="Готово!")
@@ -467,7 +467,7 @@ async def callback_worker(call: types.CallbackQuery):
         
     if call.data == '19DT':
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         sheet.update_cell(7, 3, '')
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                     text="Готово!")
@@ -475,7 +475,7 @@ async def callback_worker(call: types.CallbackQuery):
         
     if call.data == "21DT":
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         sheet.update_cell(8, 3, '')
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                     text="Готово!")
@@ -483,7 +483,7 @@ async def callback_worker(call: types.CallbackQuery):
         
     if call.data == '23DT':
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                    text="Секундочку...\nЕсли бот завис на этом сообщении напишите /start")
+                                    text="Секундочку...\n\nЕсли бот завис на этом сообщении напишите /start")
         sheet.update_cell(9, 3, '')
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                     text="Готово!")
